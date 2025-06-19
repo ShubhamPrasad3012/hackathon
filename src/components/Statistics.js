@@ -65,35 +65,71 @@ export default function CarbonChart() {
   };
 
   return (
-    <div className="p-10 bg-[#f6efed] min-h-screen text-[#6b3f3f] font-sans">
-      <div className="flex flex-col md:flex-row justify-between items-start mb-6">
-        <div className="space-x-2">
-          <button onClick={() => setTypeFilter("Refurbishment")} className={`px-4 py-2 rounded-full border ${typeFilter === "Refurbishment" ? 'bg-[#6b3f3f] text-white' : 'border-[#6b3f3f]'}`}>Refurbishment</button>
-          <button onClick={() => setTypeFilter("New build")} className={`px-4 py-2 rounded-full border ${typeFilter === "New build" ? 'bg-[#6b3f3f] text-white' : 'border-[#6b3f3f]'}`}>New build</button>
-          <button onClick={() => setTypeFilter("All")} className={`px-4 py-2 rounded-full border ${typeFilter === "All" ? 'bg-[#6b3f3f] text-white' : 'border-[#6b3f3f]'}`}>All</button>
+    <div className="p-4 sm:p-8 bg-[#f6efed] min-h-screen text-[#6b3f3f] font-sans">
+    
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+        <div className="flex flex-wrap gap-2">
+          {["Refurbishment", "New build", "All"].map((label) => (
+            <button
+              key={label}
+              onClick={() => setTypeFilter(label)}
+              className={`px-4 py-2 rounded-full border ${
+                typeFilter === label
+                  ? "bg-[#6b3f3f] text-white"
+                  : "border-[#6b3f3f] text-[#6b3f3f]"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
         </div>
-        <div className="space-x-2 mt-4 md:mt-0">
-          <button onClick={() => setStatusFilter("Complete")} className={`px-4 py-2 rounded-full border ${statusFilter === "Complete" ? 'bg-[#6b3f3f] text-white' : 'border-[#6b3f3f]'}`}>Complete</button>
-          <button onClick={() => setStatusFilter("Estimate")} className={`px-4 py-2 rounded-full border ${statusFilter === "Estimate" ? 'bg-[#6b3f3f] text-white' : 'border-[#6b3f3f]'}`}>Estimate</button>
+
+        <div className="flex flex-wrap gap-2">
+          {["Complete", "Estimate"].map((label) => (
+            <button
+              key={label}
+              onClick={() => setStatusFilter(label)}
+              className={`px-4 py-2 rounded-full border ${
+                statusFilter === label
+                  ? "bg-[#6b3f3f] text-white"
+                  : "border-[#6b3f3f] text-[#6b3f3f]"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
         </div>
       </div>
 
-      <h1 className="text-5xl font-light mb-2 leading-tight text-right">EMBODIED<br/><span className="font-normal">CARBON</span><br/>EMISSIONS</h1>
-      <p className="text-right mb-8 text-sm">Intensity measured by kgCO₂e/m²</p>
+      <div className="text-center sm:text-right">
+        <h1 className="text-3xl sm:text-5xl font-light mb-2 leading-tight">
+          EMBODIED<br />
+          <span className="font-normal">CARBON</span><br />
+          EMISSIONS
+        </h1>
+        <p className="text-sm mb-4">Intensity measured by kgCO₂e/m²</p>
+      </div>
 
-      <div className="mb-4 flex justify-end">
+      <div className="flex justify-center sm:justify-end mb-4">
         <button className="text-sm underline flex items-center space-x-1">
           <span>Download the data</span>
           <span>⬇</span>
         </button>
       </div>
 
-      <Bar data={data} options={options} />
-
-      <div className="mt-6 border-t pt-2 text-xs">
-        <p>Key</p>
-        <p className="text-gray-600">- - - 500 kgCO₂e/m² - Embodied Carbon Target 2030</p>
-        <p className="text-gray-600">──── 600 kgCO₂e/m² - Embodied Carbon Target 2025</p>
+      <div className="overflow-x-auto">
+        <div className="min-w-[600px]">
+          <Bar data={data} options={options} />
+        </div>
+      </div>
+      <div className="mt-6 border-t pt-4 text-xs">
+        <p className="mb-1">Key</p>
+        <p className="text-gray-600">
+          - - - 500 kgCO₂e/m² - Embodied Carbon Target 2030
+        </p>
+        <p className="text-gray-600">
+          ──── 600 kgCO₂e/m² - Embodied Carbon Target 2025
+        </p>
       </div>
     </div>
   );

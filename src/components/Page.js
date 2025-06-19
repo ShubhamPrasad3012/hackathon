@@ -9,7 +9,7 @@ import Projects from "./Projects";
 const Page = ({ darkMode, toggleDarkMode }) => {
   return (
     <div className="pt-16">
-      {/* ✅ PASS darkMode and toggleDarkMode HERE */}
+      
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
       <section id="home" className="min-h-screen bg-white dark:bg-black text-black dark:text-white">

@@ -5,10 +5,7 @@ import { motion } from 'framer-motion';
 const HeroSection = () => {
   return (
     <section className="relative w-full min-h-screen bg-gradient-to-b from-blue-900 to-blue-800 text-white flex items-center justify-center overflow-hidden px-4 md:px-8">
-      {/* Background cards */}
-     
-
-      {/* Foreground content */}
+    
       <div className="relative z-10 text-center max-w-3xl">
         <p className="text-sm mb-2 flex justify-center gap-3 flex-wrap">
           ⭐ 4.8 rating on Capterra | ⭐ 4.8 rating on G2 | ⭐ 350+ reviews on Xero | ⭐ 550+ reviews on QuickBooks

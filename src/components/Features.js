@@ -37,7 +37,7 @@ const sections = [
 ];
 
 const Capabilities = () => {
-  const [activeIndex, setActiveIndex] = useState(1); // Default to "Charging"
+  const [activeIndex, setActiveIndex] = useState(1); 
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -52,7 +52,6 @@ const Capabilities = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-950 py-20 px-4 md:px-16 text-black dark:text-white">
       <h2 className="text-3xl md:text-5xl font-bold text-center mb-10">BSS/OSS Capabilities</h2>
 
-      {/* Tabs */}
       <div className="flex justify-center flex-wrap gap-4 mb-10">
         {sections.map((tab, i) => (
           <button
@@ -67,7 +66,6 @@ const Capabilities = () => {
         ))}
       </div>
 
-      {/* Animated Content */}
       <div className="relative max-w-6xl mx-auto">
         <AnimatePresence mode="wait">
           <motion.div

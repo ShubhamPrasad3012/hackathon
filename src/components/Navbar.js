@@ -27,7 +27,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
         </ul>
 
         <div className="flex items-center gap-4">
-          {/* ✅ Toggle via props */}
+          
           <button onClick={toggleDarkMode} className="text-gray-700 dark:text-gray-300">
             {darkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>

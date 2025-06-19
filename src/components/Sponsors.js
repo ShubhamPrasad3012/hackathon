@@ -1,46 +1,86 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const ProductCard = ({ defaultImg, hoverImg, label }) => {
-  const [hovered, setHovered] = useState(false);
+const sponsors = [
+  '/assets/cursor.png',
+  '/assets/brex.png',
+  '/assets/remote.jpeg',
+  '/assets/arc.png',
+  '/assets/runway.png',
+  '/assets/descript.jpeg',
+  '/assets/openai.jpeg',
+  '/assets/deepl.png',
+  '/assets/figma.png',
+  '/assets/notion.png',
+  '/assets/linear.jpeg',
+  '/assets/loom.png',
+];
+
+const Sponsors = () => {
+  const [showAll, setShowAll] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [hovering, setHovering] = useState(false);
+
+  const group1 = sponsors.slice(0, 6);
+  const group2 = sponsors.slice(6, 12);
+
+  useEffect(() => {
+    if (!showAll) return;
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev === 0 ? 1 : 0));
+    }, 1500);
+    return () => clearInterval(interval);
+  }, [showAll]);
 
   return (
     <div
-      className="relative w-full sm:w-1/2 h-[90vh] transition-all duration-700 cursor-pointer overflow-hidden"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className="relative py-24 bg-black text-white text-center overflow-hidden"
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
     >
-      <img
-        src={hovered ? hoverImg : defaultImg}
-        alt="product"
-        className="w-full h-full object-cover transition-all duration-500"
-      />
-      <div className="absolute top-5 left-5 text-white font-semibold text-xl">
-        NEW
+      <h2 className="text-4xl md:text-5xl font-bold mb-8">Sponsors</h2>
+
+     {hovering && !showAll && (
+  <motion.button
+    onClick={() => setShowAll(true)}
+    initial={{ opacity: 0, y: -10 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.4 }}
+    className="absolute inset-0 flex items-center justify-center bg-black/50 text-white px-6 py-3 rounded-xl font-semibold z-20"
+  >
+    Meet our sponsors
+  </motion.button>
+)}
+
+
+      <div className="relative max-w-5xl mx-auto mt-40 px-6">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+          >
+            {(index === 0 ? group1 : group2).map((logo, i) => (
+              <div
+                key={i}
+                className="flex justify-center items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow hover:scale-105 transition-transform duration-300"
+              >
+                <img
+                  src={logo}
+                  alt={`sponsor-${i}`}
+                  className="h-16 sm:h-20 md:h-24 object-contain"
+                />
+              </div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
-      {hovered && (
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white px-6 py-3 rounded-full text-black font-medium text-lg shadow-md transition-all duration-500">
-          ADD TO BAG +
-        </div>
-      )}
     </div>
   );
 };
 
-const ProductShowcase = () => {
-  return (
-    <section className="flex flex-col sm:flex-row h-screen overflow-hidden">
-      <ProductCard
-        defaultImg="/assets/product1.png"
-        hoverImg="/assets/product2.png"
-        label="NEW"
-      />
-      <ProductCard
-        defaultImg="/assets/product3.png"
-        hoverImg="/assets/product4.png"
-        label="NEW"
-      />
-    </section>
-  );
-};
-
-export default ProductShowcase;
+export default Sponsors;
